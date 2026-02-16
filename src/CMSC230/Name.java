@@ -1,4 +1,4 @@
-package medical_facility_project;
+package CMSC230;
 
 public class Name {
     private String firstName;

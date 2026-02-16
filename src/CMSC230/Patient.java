@@ -1,4 +1,4 @@
-package medical_facility_project;
+package CMSC230;
 public class Patient {
     //public Patient(String name, Date date){
 
