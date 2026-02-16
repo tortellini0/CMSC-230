@@ -1,4 +1,4 @@
-package CMSC230;
+package code.CMSC230;
 
 public class Name {
     private String firstName;
