@@ -13,6 +13,6 @@ public class NameTest {
             IllegalArgumentException.class,
              () -> {new Name(null, null);}
         );
-        assertEquals()
+        assertEquals("firstname cant be null",exception.getMessage());
     }
 }

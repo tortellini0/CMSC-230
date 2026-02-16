@@ -1,0 +1,9 @@
+{
+    "java.project.sourcePaths": [
+        "src",
+        "test"
+    ],
+    "java.project.referencedLibraries": [
+        "c:\\Users\\rcgil\\OneDrive\\Documents\\FCC\\CMSC 230\\CMSC-230\\lib\\junit-platform-console-standalone-1.13.0-M3.jar"
+    ]
+}
