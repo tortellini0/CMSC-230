@@ -11,8 +11,16 @@ public class NameTest {
     void constructorThrowsForInvalidFirstName(){
         Exception exception = assertThrows(
             IllegalArgumentException.class,
-             () -> {new Name(null, null);}
+             () -> {new Name(null, "last name");}
         );
         assertEquals("firstname cant be null",exception.getMessage());
+    }
+    @Test
+    void constructorThrowsForInvalidLastName(){
+        Exception exception = assertThrows(
+            IllegalArgumentException.class,
+             () -> {new Name("first name", null);}
+        );
+        assertEquals("lastname cant be null",exception.getMessage());
     }
 }
