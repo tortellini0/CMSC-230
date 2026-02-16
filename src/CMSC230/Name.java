@@ -5,9 +5,23 @@ public class Name {
     private String lastName;
 
     //accesors
+    /**
+     * accessor for the first name
+     * @return - String - first name
+     */
     public String getFirstName(){return firstName;}
+
+    /**
+     * accessor for the last name
+     * @return - String - last name
+     */
     public String getLastName(){return lastName;}
 
+    /**
+     * constructor for the Name class
+     * @param firstname - String - first name
+     * @param lastname - String - last name
+     */
     public Name(String firstname, String lastname){
         if (firstname == null){
             throw new IllegalArgumentException(
@@ -21,24 +35,30 @@ public class Name {
             this.firstName = firstname;
             this.lastName = lastname;
         }
-        //TODO test
     }
+
     /**
      * gives the full name of the Name object 
      * @return - String - returns a string in the format "lastName, firstName"
      */
     public String fullName(){
-        //TODO test
         return lastName + ", " + firstName;
     }
+
     /**
      * compares 2 names to see if they are the same
      * @param other - Name - the other Name object that is being compared
      * @return - boolean - true for other having the same name and false for other not having the same name 
      */
     public Boolean match(Name other){
-        //TODO test
-        if (other.getLastName().toLowerCase().equals(this.getLastName().toLowerCase()) && other.getFirstName().toLowerCase().equals(this.getFirstName().toLowerCase())){
+        if (other == null){
+            throw new IllegalArgumentException(
+                "other cant be null"
+            );
+        }
+        boolean condition1 = other.getLastName().toLowerCase().equals(this.getLastName().toLowerCase());
+        boolean condition2 = other.getFirstName().toLowerCase().equals(this.getFirstName().toLowerCase());
+        if (condition1 && condition2){
             return true;
         }else{
             return false;
@@ -52,11 +72,15 @@ public class Name {
      * @return - boolean - returns true for This name should be before other name. returns false for this name should be after other Name
      */
     public boolean isLessThan(Name other){
-        //TODO test
+        if (other == null){
+            throw new IllegalArgumentException(
+                "other cant be null"
+            );
+        }
         if(other.fullName().toLowerCase().compareTo(this.fullName().toLowerCase()) > 0){
-            return false;
-        }else if (other.fullName().toLowerCase().compareTo(this.fullName().toLowerCase()) < 0){
             return true;
+        }else if (other.fullName().toLowerCase().compareTo(this.fullName().toLowerCase()) < 0){
+            return false;
         }else{
             return false;
         }
