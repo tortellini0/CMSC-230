@@ -1,7 +1,6 @@
 package CMSC230;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -63,7 +62,6 @@ public class NameTest {
 
     @Test
     void logicForIsLessThanWorks(){
-        boolean lessThanTrue = name3.isLessThan(name1);
         assertTrue(name3.isLessThan(name1));
         assertTrue(name2.isLessThan(name4));
         assertFalse(name1.isLessThan(name3));
