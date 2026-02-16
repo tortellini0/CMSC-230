@@ -37,6 +37,11 @@ public class PatientIdentity {
         }
     }
 
+    /**
+     * checks if this identity is the same as the other identity
+     * @param other - PatientIdentity - the other identity that is being checked
+     * @return - boolean - true for when the both identities are the same and false when they are different.
+     */
     public boolean match(PatientIdentity other){
         if (other == null){
             throw new IllegalArgumentException(
@@ -49,6 +54,11 @@ public class PatientIdentity {
             return false;
         }
     }
+    /**
+     * checks if this identity should go before the other identity by name then date of birth
+     * @param other - PatientIdentity - other identity being compared to
+     * @return - boolean - true for when this identity goes before the other identity and flase for when this identity goes after the other identity
+     */
     public boolean isLessThan(PatientIdentity other){
         if (other == null){
             throw new IllegalArgumentException(
