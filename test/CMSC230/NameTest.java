@@ -4,20 +4,8 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 public class NameTest {
-    public Name name1;
-    public Name name2;
-    public Name name3;
-    public Name name4;
-    @BeforeEach
-    void beforeEach(){
-        name1 = new Name("bbb", "bbb");
-        name2 = new Name("bbb", "bbb");
-        name3 = new Name("aaa", "aaa");
-        name4 = new Name("ccc", "ccc");
-    }
     @Test
     void constructorThrowsForInvalidFirstName(){
         Exception exception = assertThrows(
@@ -40,13 +28,16 @@ public class NameTest {
     void matchThrowsForInvalidOtherArgument(){
         Exception exception = assertThrows(
             IllegalArgumentException.class,
-             () -> {name1.match(null);}
+             () -> {new Name("firstName", "lastName").match(null);}
         );
         assertEquals("other cant be null",exception.getMessage());
     }
 
     @Test
     void MatchWorksCorrectly(){
+        Name name1 = new Name("bbb", "bbb");
+        Name name2 = new Name("bbb", "bbb");
+        Name name3 = new Name("aaa", "aaa");
         assertTrue(name1.match(name2));
         assertFalse(name1.match(name3));
     }
@@ -55,13 +46,17 @@ public class NameTest {
     void isLessThanThrowsForInvalidArgument(){
         Exception exception = assertThrows(
             IllegalArgumentException.class,
-            () -> {name1.isLessThan(null);}
+            () -> {new Name("firstName", "lastName").isLessThan(null);}
         );
         assertEquals("other cant be null", exception.getMessage());
     }
 
     @Test
     void logicForIsLessThanWorks(){
+        Name name1 = new Name("bbb", "bbb");
+        Name name2 = new Name("bbb", "bbb");
+        Name name3 = new Name("aaa", "aaa");
+        Name name4 = new Name("ccc", "ccc");
         assertTrue(name3.isLessThan(name1));
         assertTrue(name2.isLessThan(name4));
         assertFalse(name1.isLessThan(name3));
