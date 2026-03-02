@@ -58,12 +58,7 @@ public class Name {
         }
         boolean condition1 = other.getLastName().toLowerCase().equals(this.getLastName().toLowerCase());
         boolean condition2 = other.getFirstName().toLowerCase().equals(this.getFirstName().toLowerCase());
-        if (condition1 && condition2){
-            return true;
-        }else{
-            return false;
-        }
-
+        return condition1 && condition2;
     }
 
     /**

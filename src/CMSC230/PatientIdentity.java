@@ -48,11 +48,7 @@ public class PatientIdentity {
                 "other cant be null"
             );
         }
-        if (this.getName().match(other.getName()) && this.getDateOfBirth().equals(other.getDateOfBirth())){
-            return true;
-        }else {
-            return false;
-        }
+        return this.getName().match(other.getName()) && this.getDateOfBirth().equals(other.getDateOfBirth());
     }
     /**
      * checks if this identity should go before the other identity by name then date of birth
