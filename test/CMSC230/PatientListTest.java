@@ -67,6 +67,7 @@ public class PatientListTest {
         Patient p3 = new Patient(p3ID);
         PatientIdentity p4ID = new PatientIdentity(new Name("c", "c"), new Date(1,3,3));
         Patient p4 = new Patient(p4ID);
+        
         //confirms that the patients are being added
         assertTrue(list.add(p2));
         assertTrue(list.add(p1));
@@ -107,7 +108,7 @@ public class PatientListTest {
         list1.add(p3);
         list1.add(p4);
 
-        //testing with 4 pateints
+        //testing with 4 patients
         assertTrue(p1ID.match(list1.find(p1ID).getIdentity()));
         assertTrue(p2ID.match(list1.find(p2ID).getIdentity()));
         assertTrue(p3ID.match(list1.find(p3ID).getIdentity()));

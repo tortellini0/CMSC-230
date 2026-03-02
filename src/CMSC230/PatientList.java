@@ -6,6 +6,10 @@ public class PatientList {
     private int patientAmount;
     private int indexOfIteration = -1;
 
+    /**
+     * constructor for the PatientList class
+     * @param max - int - signifies the max amount of patients that can be stored in the PatientList
+     */
     public PatientList(int max){
         if (max <= 0){
             throw new IllegalArgumentException(
@@ -55,12 +59,7 @@ public class PatientList {
             return true;
         }
     }
-    // id does not exist
-    // beginning 
-    // end
-    // 1 item
-    // 2 item
-    // 3 item
+
     /**
      * uses binary search to find a patient using a patient identity
      * @param id - PatientIdentity - the identity of the patient that is being found
@@ -105,7 +104,7 @@ public class PatientList {
     public void initIteration(){
         indexOfIteration = 0;
     }
-    
+
     /**
      * uses the indexOfIteration to return the patient at that index of patientList
      * @return - Patient - the patient that was at the indexOfIteration index
