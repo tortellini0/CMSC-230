@@ -130,8 +130,6 @@ public class PatientList {
      * @return - boolean - true for successful file creation and false for unsuccessful
      */
     public boolean saveToFile(String fileName){
-        /*tests write file can be checked with import 
-         */
         if (fileName == null){
             throw new IllegalArgumentException(
                 "fileName cant be null"
@@ -163,11 +161,6 @@ public class PatientList {
      * @return - boolean - true for a successful import and false for an unsuccessful import
      */
     public boolean importFromFile(String fileName){
-        /* tests
-        how will i manage csv file lines that arent in the correct order
-        invalid filename
-        null filename
-         */
         if (fileName == null){
             throw new IllegalArgumentException(
                 "fileName cant be null"
