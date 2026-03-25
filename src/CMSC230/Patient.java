@@ -9,7 +9,10 @@ public class Patient {
     public PatientIdentity getIdentity(){return identity;}
     public UUID getUUID(){return uniqueID;}
 
-
+    /**
+     * constructor for the patient class
+     * @param id - PatientIdentity - identity of the patient being created
+     */
     public Patient(PatientIdentity id){
         if (id == null){
             throw new IllegalArgumentException(
