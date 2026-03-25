@@ -28,7 +28,7 @@ public class PatientTest {
         PatientIdentity p1I = new PatientIdentity(new Name("first","last"), new Date(107, 2, 12));
         Patient p1 = new Patient(p1I);
         String pUUID = p1.getUUID().toString();
-        assertEquals("last,first,2007-03-12,"  + pUUID, p1.toCSV());
+        assertEquals("last,first,2007-03-12," + pUUID, p1.toCSV());
     }
 
     @Test
@@ -40,7 +40,7 @@ public class PatientTest {
         assertEquals("line cant be null", exception.getMessage());
 
     }
-    
+
     @Test
     void testMakePatientDoesntLoseInfo(){
         PatientIdentity p1I = new PatientIdentity(new Name("first","last"), new Date(107, 2, 12));
