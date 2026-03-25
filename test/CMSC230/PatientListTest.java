@@ -208,6 +208,19 @@ public class PatientListTest {
 
     @Test
     void importFromFileThrowsForInvalidArgumentException(){
-        
+        PatientList list = new PatientList(5);
+        Exception exception = assertThrows(
+            IllegalArgumentException.class,
+             () -> {list.importFromFile(null);}
+        );
+        assertEquals("fileName cant be null", exception.getMessage());
+    }
+
+    @Test
+    void importFromFileReturnsFalse(){
+        PatientList list = new PatientList(1000);
+        assertFalse(list.importFromFile("patientsErrors.csv"));
+        assertEquals(4, list.getPatientAmount());
+        list.saveToFile("csvLineErrorTest.csv");
     }
 }

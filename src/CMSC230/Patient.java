@@ -21,11 +21,21 @@ public class Patient {
         }
     }
 
+    /**
+     * private constructor for the static makePatient method
+     * @param id - PatientIdentity
+     * @param uid
+     */
     private Patient(PatientIdentity id, UUID uid){
         uniqueID = uid;
+        identity = id;
 
     }
 
+    /**
+     * creates a csv line based on the current Patient with the format 
+     * @return - String - a string in the format {last name,first name,date of birth,UUID}
+     */
     public String toCSV(){
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         PatientIdentity identity = getIdentity();
@@ -35,12 +45,18 @@ public class Patient {
         String uid = getUUID().toString();
         return name + "," + date + "," + uid;
     }
+
     /**
      * creates a patient from a csv line
      * @param line - String - line format {last name,first name,date of birth,UUID}.
      * @return - Patient - the patient that is created using 
      */
     public static Patient makePatient(String line){
+        if (line == null){
+            throw new IllegalArgumentException(
+                "line cant be null"
+            );
+        }
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String[] tokens = line.split(",");
         PatientIdentity identity;
@@ -51,6 +67,12 @@ public class Patient {
             return new Patient(identity, uniqueID);
         }catch(ParseException e){
             e.printStackTrace();
+            return null;
+        }catch(IllegalArgumentException e){
+            e.printStackTrace();
+            return null;
+        }catch(ArrayIndexOutOfBoundsException a){
+            a.printStackTrace();
             return null;
         }
     }

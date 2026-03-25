@@ -9,6 +9,7 @@ public class PatientList {
     private int patientAmount;
     private int indexOfIteration = -1;
 
+    public int getPatientAmount(){return patientAmount;};
     /**
      * constructor for the PatientList class
      * @param max - int - signifies the max amount of patients that can be stored in the PatientList
@@ -181,7 +182,9 @@ public class PatientList {
             scan = new Scanner(file);
             while (scan.hasNextLine()){
                 Patient temp = Patient.makePatient(scan.nextLine());
-                add(temp);
+                if (temp != null){
+                    add(temp);
+                }
             }
         }catch(IOException e){
             e.printStackTrace();
