@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.UUID;
 public class Patient {
     private PatientIdentity identity;
-    private UUID uniqueID;
+    private final UUID uniqueID;
 
     public PatientIdentity getIdentity(){return identity;}
     public UUID getUUID(){return uniqueID;}
