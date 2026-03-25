@@ -182,6 +182,7 @@ public class PatientListTest {
         list2.initIteration();
         Patient l1 = list1.next();
         Patient l2 = list2.next();
+        assertTrue(list1.getPatientAmount() == list2.getPatientAmount());
         while((l1 != null)||(l2 != null)){
             assertTrue(l1.getIdentity().match(l2.getIdentity()));
             l1 = list1.next();
@@ -217,10 +218,15 @@ public class PatientListTest {
     }
 
     @Test
-    void importFromFileReturnsFalse(){
+    void importFromFileSkipsInvalidCSVLines(){
         PatientList list = new PatientList(1000);
-        assertFalse(list.importFromFile("patientsErrors.csv"));
-        assertEquals(4, list.getPatientAmount());
-        list.saveToFile("csvLineErrorTest.csv");
+        assertTrue(list.importFromFile("patientsErrors.csv"));
+        assertTrue(list.saveToFile("csvLineErrorTest.csv"));
+    }
+
+    @Test
+    void importFromFileReturnsFalse(){
+        PatientList list = new PatientList(6);
+        assertFalse(list.importFromFile("this is not a file name><><>.//"));
     }
 }

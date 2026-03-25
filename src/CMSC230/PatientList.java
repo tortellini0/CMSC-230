@@ -131,8 +131,6 @@ public class PatientList {
      */
     public boolean saveToFile(String fileName){
         /*tests write file can be checked with import 
-        invalid file name
-        null filename
          */
         if (fileName == null){
             throw new IllegalArgumentException(
