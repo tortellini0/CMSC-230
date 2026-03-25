@@ -26,8 +26,8 @@ public class Patient {
 
     /**
      * private constructor for the static makePatient method
-     * @param id - PatientIdentity
-     * @param uid
+     * @param id - PatientIdentity - identity of the patient being created
+     * @param uid - UUID - unique id for the patient being created
      */
     private Patient(PatientIdentity id, UUID uid){
         uniqueID = uid;
