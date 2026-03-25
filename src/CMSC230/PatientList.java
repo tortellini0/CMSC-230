@@ -1,5 +1,8 @@
 package CMSC230;
-
+import java.io.FileWriter;
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
 public class PatientList {
     private Patient[] patientList;
     private final int maxPatients;
@@ -118,5 +121,72 @@ public class PatientList {
         }else{
             return patientList[indexOfIteration++];
         }
+    }
+
+    /**
+     * saves the current PatientList to a csv
+     * @param fileName - String - file name for the csv
+     * @return - boolean - true for successful file creation and false for unsuccessful
+     */
+    public boolean saveToFile(String fileName){
+        /*tests write file can be checked with import 
+        invalid file name
+        null filename
+         */
+        if (fileName == null){
+            throw new IllegalArgumentException(
+                "fileName cant be null"
+            );
+        }
+        File file = new File(fileName);
+        boolean result = true;
+        FileWriter writer = null;
+        try{
+            writer = new FileWriter(file);
+            initIteration();
+            Patient currentPatient = next();
+            while (currentPatient != null){
+                String line = currentPatient.toCSV();
+                writer.write(line + "\n");
+                currentPatient = next();
+            }
+            writer.close();
+        }catch(IOException e){
+            e.printStackTrace();
+            result = false;
+        }
+        return result;
+    }
+
+    /**
+     * adds to the current PatientList from a pre existing file
+     * @param fileName - String - name of the file that is being imported from 
+     * @return - boolean - true for a successful import and false for an unsuccessful import
+     */
+    public boolean importFromFile(String fileName){
+        /* tests
+        how will i manage csv file lines that arent in the correct order
+        invalid filename
+        null filename
+         */
+        if (fileName == null){
+            throw new IllegalArgumentException(
+                "fileName cant be null"
+            );
+        }
+        File file = new File(fileName);
+        Scanner scan = null;
+        boolean result = true;
+        try{
+            scan = new Scanner(file);
+            while (scan.hasNextLine()){
+                Patient temp = Patient.makePatient(scan.nextLine());
+                add(temp);
+            }
+        }catch(IOException e){
+            e.printStackTrace();
+            result = false;
+        }
+        return result;
     }
 }
