@@ -5,9 +5,11 @@ import java.util.UUID;
 public class Patient {
     private PatientIdentity identity;
     private final UUID uniqueID;
+    private PrescriptionList prescriptions = new PrescriptionList();
 
     public PatientIdentity getIdentity(){return identity;}
     public UUID getUUID(){return uniqueID;}
+    public PrescriptionList getPrescriptions(){return prescriptions;}
 
     /**
      * constructor for the patient class
