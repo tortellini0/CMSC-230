@@ -13,7 +13,10 @@ public class PrescriptionList {
         head = null;
     }
 
-    //TODO test
+    /**
+     * adds a prescription to the prescription list
+     * @param pr - Prescription - the prescription being added
+     */
     public void add(Prescription pr){
         if (pr == null){
             throw new IllegalArgumentException(
@@ -97,7 +100,7 @@ public class PrescriptionList {
         String[] tokens;
         PatientIdentity identity;
         Patient tempPatient;
-        Prescription temPrescription;
+        Prescription tempPrescription;
         try{
             scan = new Scanner(file);
             while (scan.hasNextLine()){
@@ -107,9 +110,9 @@ public class PrescriptionList {
                     tokens = tempLine.split(","); 
                     identity = new PatientIdentity(new Name(tokens[0],tokens[1]), format.parse(tokens[2]));
                     tempPatient = listOfPatients.find(identity);
-                    temPrescription = Prescription.make(tempLine);
-                    if (temPrescription != null){
-                        tempPatient.getPrescriptions().add(temPrescription);
+                    tempPrescription = Prescription.make(tempLine);
+                    if (tempPrescription != null){
+                        tempPatient.getPrescriptions().add(tempPrescription);
                     }
                 }catch(ParseException e){
                     e.printStackTrace();

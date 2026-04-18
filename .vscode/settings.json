@@ -3,8 +3,9 @@
         "src",
         "test"
     ],
+    "java.project.outputPath": "target/classes",
     "java.project.referencedLibraries": [
-        "c:\\Users\\rcgil\\OneDrive\\Documents\\FCC\\CMSC 230\\CMSC-230\\lib\\junit-platform-console-standalone-1.13.0-M3.jar",
-        "test-lib\\**\\*.jar"
-    ]
+        "test-lib/**/*.jar"
+    ],
+    "java.configuration.updateBuildConfiguration": "automatic"
 }

@@ -89,12 +89,31 @@ public class PrescriptionListTest {
     @Test
     void testReadFromFileWorks(){
         PatientList pList = new PatientList(10);
-        PatientIdentity id1 = new PatientIdentity(new Name("firstname1","lastname1"), new Date(2000,0,1));
-        PatientIdentity id2 = new PatientIdentity(new Name("firstname2","lastname2"), new Date(2001,1,2));
+        PatientIdentity id1 = new PatientIdentity(new Name("firstname1","lastname1"), new Date(2000-1900,0,1));
+        PatientIdentity id2 = new PatientIdentity(new Name("firstname2","lastname2"), new Date(2001-1900,1,1));
         Patient p1 = new Patient(id1);
         Patient p2 = new Patient(id2);
         pList.add(p1);
         pList.add(p2);
         PrescriptionList.readFromFile("testPrescriptionList.csv", pList);
-    }    
+        pList.initIteration();
+        PrescriptionList list1 = pList.next().getPrescriptions();
+        list1.initIteration();
+        PrescriptionList list2 = pList.next().getPrescriptions();
+        list2.initIteration();
+
+        assertTrue(list1.next() != null);
+        assertTrue(list1.next() == null);
+
+        assertTrue(list2.next() != null);
+        assertTrue(list2.next() == null);
+    }
+
+    @Test
+    void readFromFileHasInvalidFileName(){
+        PatientList plist = new PatientList(20);
+        assertFalse(PrescriptionList.readFromFile("///><<>ccc", plist));
+    }
+    
+    
 }

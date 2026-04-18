@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 public class NameTest {
     @Test
-    void constructorThrowsForInvalidFirstName(){
+    public void constructorThrowsForInvalidFirstName(){
         Exception exception = assertThrows(
             IllegalArgumentException.class,
              () -> {new Name(null, "last name");}

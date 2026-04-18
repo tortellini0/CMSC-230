@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 public class PatientIdentityTest {
 
     @Test
-    void constructerThrowsForInvalidTempName(){
+    public void constructerThrowsForInvalidTempName(){
         Exception exception = assertThrows(
             IllegalArgumentException.class,
              () -> {new PatientIdentity(null, new Date(2008,1,15));}
