@@ -2,7 +2,7 @@ package CMSC230;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.UUID;
-public class Patient {
+public class Patient implements IdentifiedObject{
     private PatientIdentity identity;
     private final UUID uniqueID;
     private PrescriptionList prescriptions = new PrescriptionList();
