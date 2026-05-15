@@ -72,7 +72,7 @@ public class PrescriptionListTest {
     void readFromFileThrowsForNullFileName(){
         Exception exception = assertThrows(
             IllegalArgumentException.class,
-            () -> {PrescriptionList.readFromFile(null, new PatientList(10));}
+            () -> {PrescriptionList.readFromFile(null, new PatientList());}
         );
         assertEquals("fileName cant be null", exception.getMessage());
     }
@@ -88,7 +88,7 @@ public class PrescriptionListTest {
 
     @Test
     void testReadFromFileWorks(){
-        PatientList pList = new PatientList(10);
+        PatientList pList = new PatientList();
         PatientIdentity id1 = new PatientIdentity(new Name("firstname1","lastname1"), new Date(2000-1900,0,1));
         PatientIdentity id2 = new PatientIdentity(new Name("firstname2","lastname2"), new Date(2001-1900,1,1));
         Patient p1 = new Patient(id1);
@@ -111,7 +111,7 @@ public class PrescriptionListTest {
 
     @Test
     void readFromFileHasInvalidFileName(){
-        PatientList plist = new PatientList(20);
+        PatientList plist = new PatientList();
         assertFalse(PrescriptionList.readFromFile("///><<>ccc", plist));
     }
     

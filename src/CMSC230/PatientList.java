@@ -4,26 +4,14 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 public class PatientList {
-    private Patient[] patientList;
-    private final int maxPatients;
     private int patientAmount;
-    private int indexOfIteration = -1;
     private BinarySearchTree patientTree = new BinarySearchTree();
 
     public int getPatientAmount(){return patientAmount;};
     /**
      * constructor for the PatientList class
-     * @param max - int - signifies the max amount of patients that can be stored in the PatientList
      */
-    public PatientList(int max){
-        if (max <= 0){
-            throw new IllegalArgumentException(
-                "max must be greater than 0"
-            );
-        }
-        maxPatients = max;
-        patientList = new Patient[maxPatients];
-        patientAmount = 0;
+    public PatientList(){
     }
 
 
@@ -36,34 +24,6 @@ public class PatientList {
         patientTree.add(patient);
     }
 
-    /**
-     * adds a patient to the patientList while maintaining the sort of name then date of birth
-     * @param patient - Patient - patient that is being added
-     * @return - boolean - returns true for a successful add but false for an unsuccessful add
-     */
-    private boolean addOrdered(Patient patient){
-        if (patient == null){
-            throw new IllegalArgumentException(
-                "patient cant be null"
-            );
-        }
-        int currentIndex = patientAmount - 1;
-        if(patientAmount == maxPatients){
-            return false;
-        }else if (patientAmount == 0){
-            patientList[0] = patient;
-            patientAmount++;
-            return true;
-        }else {
-            while (currentIndex >= 0 && patient.getIdentity().isLessThan(patientList[currentIndex].getIdentity())){
-                patientList[currentIndex+1] = patientList[currentIndex];
-                currentIndex--;
-            }
-            patientAmount++;
-            patientList[currentIndex+1] = patient;
-            return true;
-        }
-    }
     
 
     /**
@@ -80,29 +40,6 @@ public class PatientList {
         return (Patient)patientTree.find(id);
     }
 
-    /**
-     * uses binary search to find a patient using a patient identity
-     * @param id - PatientIdentity - the identity of the patient that is being found
-     * @return - Patient - returns the Patient if it is found and null if it is not found
-     */
-    private Patient binarySearch(PatientIdentity id){
-        int lower = 0;
-        int upper = patientAmount - 1;
-        int mid = (upper + lower)/2;
-        while (!id.match(patientList[mid].getIdentity()) && (lower < upper)){
-            if(id.isLessThan(patientList[mid].getIdentity())){
-                upper = mid - 1;
-            }else{
-                lower = mid + 1;
-            }
-            mid = (lower + upper)/2;
-        }
-        if(patientList[mid].getIdentity().match(id)){
-            return patientList[mid];
-        }else{
-            return null;
-        }
-    }
 
     /**
      * initiates the iterator

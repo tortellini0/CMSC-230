@@ -11,19 +11,10 @@ import org.junit.jupiter.api.Test;
 
 public class PatientListTest {
 
-    @Test
-    void constructorThrowsForInvalidArgument(){
-        Exception exception = assertThrows(
-            IllegalArgumentException.class,
-             () -> {new PatientList(-1);}
-        );
-        assertEquals("max must be greater than 0", exception.getMessage());
-
-    }
 
     @Test
     void testIterators(){
-        PatientList list = new PatientList(3);
+        PatientList list = new PatientList();
         PatientIdentity p1ID = new PatientIdentity(new Name("a", "a"), new Date(1,3,3));
         Patient p1 = new Patient(p1ID);
         PatientIdentity p2ID = new PatientIdentity(new Name("a", "a"), new Date(1,4,4));
@@ -51,14 +42,14 @@ public class PatientListTest {
 
         Exception exception = assertThrows(
             IllegalArgumentException.class,
-             () -> {new PatientList(5).add(null);}
+             () -> {new PatientList().add(null);}
         );
-        assertEquals("patient cant be null", exception.getMessage());
+        assertEquals("object cant be null", exception.getMessage());
     }
 
     @Test
     void testAddOrdered(){
-        PatientList list = new PatientList(4);
+        PatientList list = new PatientList();
         PatientIdentity p1ID = new PatientIdentity(new Name("a", "a"), new Date(1,3,3));
         Patient p1 = new Patient(p1ID);
         PatientIdentity p2ID = new PatientIdentity(new Name("a", "a"), new Date(1,4,4));
@@ -69,11 +60,11 @@ public class PatientListTest {
         Patient p4 = new Patient(p4ID);
         
         //confirms that the patients are being added
-        assertTrue(list.add(p2));
-        assertTrue(list.add(p1));
-        assertTrue(list.add(p4));
-        assertTrue(list.add(p3));
-        assertFalse(list.add(p4));
+        list.add(p2);
+        list.add(p1);
+        list.add(p4);
+        list.add(p3);
+        list.add(p4);
 
         //confirms that the list is sorted
         Patient[] confirmedList = {p1,p2,p3,p4};
@@ -87,14 +78,14 @@ public class PatientListTest {
     void binarySearchThrowsForInvalidArgument(){
         Exception exception = assertThrows(
             IllegalArgumentException.class,
-             () -> {new PatientList(5).find(null);}
+             () -> {new PatientList().find(null);}
         );
         assertEquals("id cant be null", exception.getMessage());
     }
 
     @Test
     void testBinarySearchWtih4Items(){    
-        PatientList list1 = new PatientList(4);
+        PatientList list1 = new PatientList();
         PatientIdentity p1ID = new PatientIdentity(new Name("a", "a"), new Date(1,3,3));
         Patient p1 = new Patient(p1ID);
         PatientIdentity p2ID = new PatientIdentity(new Name("a", "a"), new Date(1,4,4));
@@ -121,7 +112,7 @@ public class PatientListTest {
     void testBinarySearchWith1Items(){
         PatientIdentity p1ID = new PatientIdentity(new Name("a", "a"), new Date(1,3,3));
         Patient p1 = new Patient(p1ID);
-        PatientList list2 = new PatientList(1);
+        PatientList list2 = new PatientList();
         list2.add(p1);
         assertTrue(p1ID.match(list2.find(p1ID).getIdentity()));
         assertTrue(list2.find(new PatientIdentity(new Name("1","2"), new Date(1,1,1))) == null);
@@ -133,7 +124,7 @@ public class PatientListTest {
         PatientIdentity p2ID = new PatientIdentity(new Name("a", "a"), new Date(1,4,4));
         Patient p2 = new Patient(p2ID);
         //testing with 2 patients
-        PatientList list3 = new PatientList(2);
+        PatientList list3 = new PatientList();
         list3.add(p1);
         list3.add(p2);
         assertTrue(p1ID.match(list3.find(p1ID).getIdentity()));
@@ -149,7 +140,7 @@ public class PatientListTest {
         PatientIdentity p3ID = new PatientIdentity(new Name("b", "b"), new Date(1,3,3));
         Patient p3 = new Patient(p3ID);
         //testing with 3 patients
-        PatientList list4 = new PatientList(3);
+        PatientList list4 = new PatientList();
         list4.add(p1);        
         list4.add(p2);        
         list4.add(p3);        
@@ -161,8 +152,8 @@ public class PatientListTest {
 
     @Test
     void testSaveToFileAndReadFromFile(){
-        PatientList list1 = new PatientList(4);
-        PatientList list2 = new PatientList(5);
+        PatientList list1 = new PatientList();
+        PatientList list2 = new PatientList();
         PatientIdentity p1ID = new PatientIdentity(new Name("a", "a"), new Date(1,3,3));
         Patient p1 = new Patient(p1ID);
         PatientIdentity p2ID = new PatientIdentity(new Name("a", "a"), new Date(1,4,4));
@@ -192,13 +183,13 @@ public class PatientListTest {
 
     @Test
     void saveToFileReturnsFalse(){
-        PatientList list = new PatientList(5);
+        PatientList list = new PatientList();
         assertFalse(list.saveToFile("notAfileName/>><<"));
     }
 
     @Test
     void saveToFileThrowsForInvalidArgumentException(){
-        PatientList list = new PatientList(5);
+        PatientList list = new PatientList();
         Exception exception = assertThrows(
             IllegalArgumentException.class,
              () -> {list.saveToFile(null);}
@@ -209,7 +200,7 @@ public class PatientListTest {
 
     @Test
     void importFromFileThrowsForInvalidArgumentException(){
-        PatientList list = new PatientList(5);
+        PatientList list = new PatientList();
         Exception exception = assertThrows(
             IllegalArgumentException.class,
              () -> {list.importFromFile(null);}
@@ -219,14 +210,14 @@ public class PatientListTest {
 
     @Test
     void importFromFileSkipsInvalidCSVLines(){
-        PatientList list = new PatientList(1000);
+        PatientList list = new PatientList();
         assertTrue(list.importFromFile("patientsErrors.csv"));
         assertTrue(list.saveToFile("csvLineErrorTest.csv"));
     }
 
     @Test
     void importFromFileReturnsFalse(){
-        PatientList list = new PatientList(6);
+        PatientList list = new PatientList();
         assertFalse(list.importFromFile("this is not a file name><><>.//"));
     }
 }
