@@ -8,6 +8,7 @@ public class PatientList {
     private final int maxPatients;
     private int patientAmount;
     private int indexOfIteration = -1;
+    private BinarySearchTree patientTree = new BinarySearchTree();
 
     public int getPatientAmount(){return patientAmount;};
     /**
@@ -31,8 +32,8 @@ public class PatientList {
      * @param patient - Patient - patient that is being added
      * @return - boolean - returns true for a successful add but false for an unsuccessful add
      */
-    public boolean add(Patient patient){
-        return addOrdered(patient);
+    public void add(Patient patient){
+        patientTree.add(patient);
     }
 
     /**
@@ -63,6 +64,7 @@ public class PatientList {
             return true;
         }
     }
+    
 
     /**
      * uses binary search to find a patient using a patient identity
@@ -70,7 +72,12 @@ public class PatientList {
      * @return - Patient - returns the Patient if it is found and null if it is not found
      */
     public Patient find(PatientIdentity id){
-        return binarySearch(id);
+        if (id == null){
+            throw new IllegalArgumentException(
+                "id cant be null"
+            );
+        }
+        return (Patient)patientTree.find(id);
     }
 
     /**
@@ -79,11 +86,6 @@ public class PatientList {
      * @return - Patient - returns the Patient if it is found and null if it is not found
      */
     private Patient binarySearch(PatientIdentity id){
-        if (id == null){
-            throw new IllegalArgumentException(
-                "id cant be null"
-            );
-        }
         int lower = 0;
         int upper = patientAmount - 1;
         int mid = (upper + lower)/2;
@@ -106,7 +108,7 @@ public class PatientList {
      * initiates the iterator
      */
     public void initIteration(){
-        indexOfIteration = 0;
+        patientTree.initIteration();
     }
 
     /**
@@ -114,14 +116,7 @@ public class PatientList {
      * @return - Patient - the patient that was at the indexOfIteration index
      */
     public Patient next(){
-        if (indexOfIteration == -1){
-            return null;
-        }else if ( (indexOfIteration >= maxPatients) || (patientList[indexOfIteration] == null) ){
-            indexOfIteration = -1;
-            return null;
-        }else{
-            return patientList[indexOfIteration++];
-        }
+        return (Patient) patientTree.next();
     }
 
     /**
@@ -149,7 +144,7 @@ public class PatientList {
             }
             writer.close();
         }catch(IOException e){
-            e.printStackTrace();
+            //e.printStackTrace();
             result = false;
         }
         return result;
@@ -178,7 +173,7 @@ public class PatientList {
                 }
             }
         }catch(IOException e){
-            e.printStackTrace();
+            //e.printStackTrace();
             result = false;
         }
         return result;

@@ -2,6 +2,7 @@ package CMSC230;
 
 public class BinarySearchTree {
     private TreeNode root;
+    private MyStack<TreeNode> iterationStack = new MyStack<TreeNode>(100);
     /**
      * finds the Identified object associated with an Identity
      * @param identity - Identity - identity that is being used to find an Identified Object
@@ -58,6 +59,31 @@ public class BinarySearchTree {
         }else{
             tempRoot.right = addNode(tempRoot.right, add);
             return tempRoot;
+        }
+    }
+    public void initIteration(){
+        iterationStack.empty();
+        findLeftMost(root, iterationStack);
+    }
+
+    public IdentifiedObject next(){
+        TreeNode returnNode = iterationStack.pop();
+        if (returnNode == null){
+            return null;
+        }
+        if (returnNode.right != null){
+            findLeftMost(returnNode.right, iterationStack);
+            //System.out.println("donedonedasdsdfsfdgdfhfgjertqw ");
+        }
+        return returnNode.data;
+    }
+
+    private void findLeftMost(TreeNode startingNode, MyStack<TreeNode> stack){
+        TreeNode start = startingNode;
+        while(start != null){
+            //System.out.println("testtest");
+            stack.push(start);
+            start = start.left;
         }
     }
 
