@@ -2,14 +2,14 @@ package CMSC230;
 
 import java.text.ParseException;
 import java.util.Date;
-
-
+import java.util.concurrent.TimeUnit;
 import java.text.SimpleDateFormat;
 public class Prescription {
     private String medicineName;
     private Date date;
     private int dosage;
     private String prescriber;
+    public static HashTable contraindication = new HashTable(2503);
 
     public Date getDate(){return date;} 
     public String getName(){return medicineName;}
@@ -112,4 +112,8 @@ public class Prescription {
             return null;
         }
     }
+    public static int difference_in_days( Date date1, Date date2 ) {
+    return (int) (TimeUnit.DAYS.convert(Math.abs(date2.getTime() -date1.getTime()), TimeUnit.MILLISECONDS));
+    }
+    
 }

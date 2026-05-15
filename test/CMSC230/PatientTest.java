@@ -61,4 +61,36 @@ public class PatientTest {
         assertNull(Patient.makePatient(csv3));
     }
 
+    @Test
+    void canTakeWorks(){
+        //prescriptions pat has
+        Prescription p1 = new Prescription("med1", new Date(126, 0, 15), 5, "doctor");
+        Prescription p3 = new Prescription("med3", new Date(124, 2, 15), 5, "doctor");
+        Prescription p4 = new Prescription("med9", new Date(126, 1, 15), 5, "doctor");
+        Prescription p5 = new Prescription("med5", new Date(126, 2, 15), 5, "doctor");
+        Prescription pMed4 = new Prescription("med4", new Date(126, 3, 15), 5, "doctor");
+        Prescription pMed2 = new Prescription("med2", new Date(126, 4, 15), 5, "doctor");
+
+        PatientIdentity patID = new PatientIdentity(new Name("ryan", "gildersleeve"), new Date(108, 2, 20));
+        Patient pat = new Patient(patID);
+        pat.getPrescriptions().add(p5);
+        pat.getPrescriptions().add(p4);
+        pat.getPrescriptions().add(p3);
+        pat.getPrescriptions().add(p1);
+        Prescription.contraindication.loadFromFile("contraindications.csv");
+        //trying to prescribe med2, med4
+        assertFalse(pat.canTake(pMed2));
+        assertTrue(pat.canTake(pMed4));
+    }
+
+    @Test
+    void canTakeThrowsForIllegalArgument(){
+        PatientIdentity patID = new PatientIdentity(new Name("ryan", "gildersleeve"), new Date(108, 2, 20));
+        Patient pat = new Patient(patID);
+        Exception e = assertThrows(
+            IllegalArgumentException.class,
+            () -> {pat.canTake(null);}
+        );
+        assertEquals("prescribe cant be null", e.getMessage());
+    }
 }

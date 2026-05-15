@@ -34,7 +34,7 @@ public class PrescriptionList {
             ListItem itemBefore = null;
             // 1,3,5,7,9
             //6
-            while ( (Prescription.moreRecent(itemCurrent.data, itemAdd.data) )){
+            while ((itemCurrent != null) && (Prescription.moreRecent(itemCurrent.data, itemAdd.data) )){
                 itemBefore = itemCurrent;
                 itemCurrent = itemCurrent.next;
             }

@@ -11,6 +11,27 @@ public class Patient implements IdentifiedObject{
     public UUID getUUID(){return uniqueID;}
     public PrescriptionList getPrescriptions(){return prescriptions;}
 
+    public boolean canTake(Prescription prescribe){
+        if (prescribe == null){
+            throw new IllegalArgumentException(
+                "prescribe cant be null"
+            );
+        }
+        boolean result = true;
+        prescriptions.initIteration();
+        String medicine1 = prescribe.getName();
+        Prescription start = prescriptions.next();
+        while (start != null){
+            if (Prescription.difference_in_days(start.getDate(), prescribe.getDate()) <= 365){
+                if (Prescription.contraindication.find(medicine1 + ", " + start.getName()) || Prescription.contraindication.find(start.getName() + ", " + medicine1)){
+                    result = false;
+               }
+            }
+            start = prescriptions.next();
+        }
+        return result;
+    }
+
     /**
      * constructor for the patient class
      * @param id - PatientIdentity - identity of the patient being created
